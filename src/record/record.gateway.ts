@@ -6,6 +6,8 @@ import {
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
 
+// import interface msgformat = > from client ?
+
 @WebSocketGateway()
 export class RecordGateway {
   @WebSocketServer()
@@ -15,21 +17,30 @@ export class RecordGateway {
   //   // this.test();
   // }
 
+  formatLog(text: string, data: any): void {
+    const time = new Date(data['timestamp']).toLocaleString();
+    console.log(text, time, data['message']);
+  }
+
+
   @SubscribeMessage('record') 
   handleRecord(client: any, payload: any): void {
-    console.log('client: ', client)
-    console.log('payload: ', payload)
+    // console.log('client: ', client)
+    this.formatLog('record payload: ', payload)
     //return 'Hello world!';
   }
 
-  // @SubscribeMessage('debug')
-  // handleDebug( @MessageBody() data: string,): string {
-  //   console.log('data: ', data)
-  //   return 'OK';
-  // }
+  @SubscribeMessage('debug')
+  handleDebug( @MessageBody() data: string,): string {
+    // const time = new Date(data['timestamp']).toISOString();
+    // console.log('debug data: ', time, data['message'] )
+    this.formatLog('debug data: ', data)
+    return 'OK';
+  }
   
   handleConnection(client: any, ...args: any[]): any {
-    console.log('connected: ', client);
+    // console.log('connected: ', client);
+    console.log('client: ', client.conn.remoteAddress);
   }
 
   afterInit(server: any): any {
@@ -37,7 +48,7 @@ export class RecordGateway {
   }
 
   handleDisconnect(client: any): any {
-    console.log(`ClientDisconnect: ${client}`)
+    console.log(`ClientDisconnect: ${client.conn.remoteAddress}`)
   }
 
   // test() {
