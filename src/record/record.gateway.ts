@@ -18,8 +18,11 @@ export class RecordGateway {
   // }
 
   formatLog(text: string, data: any): void {
-    const time = new Date(data['timestamp']).toLocaleString();
-    console.log(text, time, data['message']);
+    let txtOut = '';
+    if ( data['timestamp'] ){
+      txtOut = new Date(data['timestamp']).toLocaleString();
+    }
+    console.log(text, data['message'], txtOut);
   }
 
 
@@ -27,7 +30,19 @@ export class RecordGateway {
   handleRecord(client: any, payload: any): void {
     // console.log('client: ', client)
     this.formatLog('record payload: ', payload)
-    //return 'Hello world!';
+    console.log('record: ', payload)
+    return payload;
+  }
+  @SubscribeMessage('test') 
+  handlePing(client: any, payload: any): void {
+    console.log('ping: ', payload)
+    this.server.emit('test', payload);
+    return payload;
+  }
+  @SubscribeMessage('message') 
+  handleMessage(client: any, payload: any): void {
+    console.log('message: ', payload)
+    return payload;
   }
 
   @SubscribeMessage('debug')
@@ -35,7 +50,7 @@ export class RecordGateway {
     // const time = new Date(data['timestamp']).toISOString();
     // console.log('debug data: ', time, data['message'] )
     this.formatLog('debug data: ', data)
-    return 'OK';
+    return data;
   }
   
   handleConnection(client: any, ...args: any[]): any {
