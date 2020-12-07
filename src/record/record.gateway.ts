@@ -24,23 +24,29 @@ export class RecordGateway {
     }
     console.log(text, data['message'], txtOut);
   }
-
+  @SubscribeMessage('cmd') 
+  handleCmd(socket: any, payload: any): void {
+    console.log('cmd: ', payload)
+    // this.server.emit('test', payload);
+    socket.broadcast.emit("cmd", payload);
+    return payload;
+  }
 
   @SubscribeMessage('record') 
-  handleRecord(client: any, payload: any): void {
+  handleRecord(socket: any, payload: any): void {
     // console.log('client: ', client)
     this.formatLog('record payload: ', payload)
     console.log('record: ', payload)
     return payload;
   }
   @SubscribeMessage('test') 
-  handlePing(client: any, payload: any): void {
+  handlePing(socket: any, payload: any): void {
     console.log('ping: ', payload)
-    this.server.emit('test', payload);
+    socket.emit('test', payload);
     return payload;
   }
   @SubscribeMessage('message') 
-  handleMessage(client: any, payload: any): void {
+  handleMessage(socket: any, payload: any): void {
     console.log('message: ', payload)
     return payload;
   }
@@ -53,17 +59,17 @@ export class RecordGateway {
     return data;
   }
   
-  handleConnection(client: any, ...args: any[]): any {
+  handleConnection(socket: any, ...args: any[]): any {
     // console.log('connected: ', client);
-    console.log('client: ', client.conn.remoteAddress);
+    console.log('client: ', socket.conn.remoteAddress, socket.client.id );
   }
 
   afterInit(server: any): any {
     console.log('SignallingGateway initialized');
   }
 
-  handleDisconnect(client: any): any {
-    console.log(`ClientDisconnect: ${client.conn.remoteAddress}`)
+  handleDisconnect(socket: any): any {
+    console.log(`ClientDisconnect: ${socket.conn.remoteAddress}  ${socket.client.id}`)
   }
 
   // test() {
