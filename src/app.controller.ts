@@ -16,6 +16,7 @@ export class AppController {
     return this.appService.getHello();
     // this.redisdbService.
   }
+  //#region timeseriesService
   @Get('info')
   info():  any {
     // console.log('getBookmarks ');
@@ -32,4 +33,5 @@ export class AppController {
     const test: ISample = { value: 12345, timestamp: new Date().getTime()};
     return this.timeseriesService.put('range', test);
   }
+  //#endregion
 }

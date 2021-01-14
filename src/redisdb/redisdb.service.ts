@@ -12,10 +12,11 @@ export class RedisdbService {
     constructor(private configService: ConfigService) { 
       this.options.host = this.configService.get<string>('RedisHost');
       this.options.port = this.configService.get<number>('RedisPort');
+      this.options.max_attempts = 10;
     }
 
     connect(): void {
-      this.client = redis.createClient(this.options);
+      // this.client = redis.createClient(this.options);
       console.log('redis connect: ', this.client.connected);
       // this.options.port = env.redis.port;
       this.errLog();

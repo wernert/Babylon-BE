@@ -19,7 +19,7 @@ export interface ISample {
 
 const options: ConnectionOptions = {
   port: 6379,
-  host: "127.0.0.1",
+  host: "face2",
   db: 15
 };
 @Injectable()
@@ -30,8 +30,10 @@ export class TimeseriesService {
   private redis: Redis.Redis;
 
   constructor() {
-    this.redis = new Redis(options);
     // this.redisTimeSeries = this.factory.create();
+  }
+  connect(){
+    this.redis = new Redis(options);
   }
 
   async info(label: string): Promise<any>  {

@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as fs from 'fs';
-import { RedisIoAdapter } from './adapters/redis-io.adapter';
+// import { RedisIoAdapter } from './adapters/redis-io.adapter';
 
 const httpsOptions = {
   key: fs.readFileSync('C:\\dev\\ssl\\ca.key'),
