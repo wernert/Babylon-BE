@@ -1,6 +1,6 @@
 {
   "name": "babylon-be",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "author": "",
   "private": true,
@@ -21,7 +21,6 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "dev": "node -r ts-node/register src/main.ts",
     "tsdev": "ts-node-dev src/main.ts"
-
   },
   "dependencies": {
     "@nestjs/common": "^7.4.4",
