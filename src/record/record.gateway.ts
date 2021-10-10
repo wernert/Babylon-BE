@@ -47,7 +47,7 @@ export class RecordGateway {
   }
   @SubscribeMessage('message') 
   handleMessage(socket: any, payload: any): void {
-    console.log('message: ', payload)
+    console.log('record message: ', payload)
     return payload;
   }
 

@@ -1,3 +1,37 @@
+
+# Babylon-BE
+
+gateway websocket:
+
+controller http urls:
+
+----------------------------------------------
+## npmwt module
+### for try 
+* npm exec commands
+* npm direct via import
+
+reads global  
+wired commands:  
+* ls < depth ?
+* outdated
+
+sends update package command on button click 
+### reads:
+* package json
+* package lock
+* ? 
+
+### files:  
+* gateway
+* service
+  * exec
+
+### refs:
+
+==================================================================
+
+----------------------------------------------
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
