@@ -61,7 +61,7 @@ export class RecordGateway {
   
   handleConnection(socket: any, ...args: any[]): any {
     // console.log('connected: ', client);
-    console.log('client: ', socket.conn.remoteAddress, socket.client.id );
+    console.log('ClientConnect: ', socket.conn.remoteAddress, socket.client.id );
   }
 
   afterInit(server: any): any {
